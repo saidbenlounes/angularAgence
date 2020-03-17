@@ -1,8 +1,21 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { AdminDashbordComponent } from './admin/admin-dashbord/admin-dashbord.component';
+import { SigninComponent } from './authentification/signin/signin.component';
+import { SinglePropertyComponent } from './single-property/single-property.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: 'home', component: HomeComponent},
+  { path:'admin/dashboard',canActivate:[AuthGuardService], component: AdminDashbordComponent},
+  { path:'login', component:SigninComponent },
+  { path:'property/:id', component:SinglePropertyComponent},
+  { path: '', redirectTo:'home', pathMatch:'full' },
+  { path: '**', redirectTo:'home' }
+
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
